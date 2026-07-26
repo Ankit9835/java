@@ -25,3 +25,17 @@ systemctl status jenkins
 systemctl stop jenkins
 systemctl start jenkins
 sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+
+sudo install -d -o jenkins -g jenkins -m 750 /var/lib/jenkins/tmp
+sudo systemctl edit jenkins
+
+[Service]
+Environment="JAVA_OPTS=-Djava.awt.headless=true -Djava.io.tmpdir=/var/lib/jenkins/tmp"
+
+Press Ctrl + O — save/write the file.
+Press Enter — confirm the filename.
+Press Ctrl + X — exit Nano.
+
+sudo systemctl daemon-reload
+sudo systemctl restart jenkins
+sudo systemctl status jenkins --no-pager
