@@ -1,4 +1,4 @@
-
+this is for installing jenkins inside aws terminal
 
 
 sudo apt update
@@ -39,3 +39,23 @@ Press Ctrl + X — exit Nano.
 sudo systemctl daemon-reload
 sudo systemctl restart jenkins
 sudo systemctl status jenkins --no-pager
+
+
+
+this is for installing jenkins inside aws terminal using docker
+
+docker volume create jenkins_home
+
+docker run -it -d \
+  --name jenkins \
+  --restart unless-stopped \
+  -p 8080:8080 \
+  -v jenkins_home:/var/jenkins_home \
+  jenkins/jenkins:latest
+
+docker ps
+
+Get the initial admin password—the cat command shown in the image must run inside the container:
+
+docker exec jenkins \
+  cat /var/jenkins_home/secrets/initialAdminPassword
